@@ -90,7 +90,7 @@ const generateAndDeploy = () => {
   shell.exec(`git config user.email ${context.actor}@users.noreply.github.com`)
   shell.exec("git add -A")
   shell.exec("git commit -m 'Deploying Updated Jazzy Docs'")
-  shell.exec(`git push ${remote} master:${branch}`)
+  shell.exec(`git push ${remote} ${branch}`)
 }
 
 try {
