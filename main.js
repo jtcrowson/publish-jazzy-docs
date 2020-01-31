@@ -81,19 +81,16 @@ const getDocumentationFolder = () => {
 }
 
 const generateAndDeploy = () => {
+  shell.exec("(git show-branch gh-pages &>/dev/null) && (git checkout gh-pages) || (git checkout -b gh-pages)")
+  shell.exec("git pull origin master —no-edit")
   shell.exec(generateJazzyInstallCommand())
   shell.exec(generateJazzyArguments())
-  shell.cp("-r", `${getDocumentationFolder()}/*`, "../")
-
-  shell.cd("../")
-  shell.rm("-rf", `${process.env.GITHUB_WORKSPACE}`)
-
-  shell.exec("git init")
+  shell.cp("-rf", `${getDocumentationFolder()}/*`, ".")
   shell.exec(`git config user.name ${context.actor}`)
   shell.exec(`git config user.email ${context.actor}@users.noreply.github.com`)
-  shell.exec("git add .")
+  shell.exec("git add -A")
   shell.exec("git commit -m 'Deploying Updated Jazzy Docs'")
-  shell.exec(`git push --force ${remote} master:${branch}`)
+  shell.exec(`git push ${remote} master:${branch}`)
 }
 
 try {
