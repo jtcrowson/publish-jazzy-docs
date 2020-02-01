@@ -85,7 +85,9 @@ const generateAndDeploy = () => {
   shell.exec(`git config user.name ${context.actor}`)
   shell.exec(`git config user.email ${context.actor}@users.noreply.github.com`)
   shell.exec("git pull ${remote} ${branch} --no-edit")
+    shell.echo("git pull ${remote} ${branch} --no-edit");
   shell.exec("git pull ${remote} master --no-edit")
+    shell.echo("git pull ${remote} master --no-edit");
   shell.exec(generateJazzyInstallCommand())
   shell.exec(generateJazzyArguments())
   shell.cp("-rf", `${getDocumentationFolder()}/*`, ".")
