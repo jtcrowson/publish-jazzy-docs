@@ -82,8 +82,8 @@ const getDocumentationFolder = () => {
 
 const generateAndDeploy = () => {
   shell.exec("(git show-branch gh-pages &>/dev/null) && (git checkout gh-pages) || (git checkout -b gh-pages)")
-  shell.exec("git pull ${remote} ${branch} —no-edit")
-  shell.exec("git pull ${remote} master —no-edit")
+  shell.exec("git pull ${remote} ${branch} --no-edit")
+  shell.exec("git pull ${remote} master --no-edit")
   shell.exec(generateJazzyInstallCommand())
   shell.exec(generateJazzyArguments())
   shell.cp("-rf", `${getDocumentationFolder()}/*`, ".")
